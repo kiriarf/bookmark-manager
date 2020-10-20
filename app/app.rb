@@ -4,8 +4,7 @@ class BookmarkManager < Sinatra::Base
   enable :sessions
 
   get '/' do
-    # erb(:index)
-    "Hello world!"
+    erb(:index)
   end
 
   # post '/name' do
