@@ -7,7 +7,14 @@ class BookmarkManager < Sinatra::Base
     erb(:index)
   end
 
-  # post '/name' do
+  get '/bookmarks' do
+    erb(:bookmarks)
+  end
+ 
+  run! if app_file == $0
+end
+
+ # post '/name' do
   #   session[:name] = params[:name]
   #   redirect '/play'
   # end
@@ -23,6 +30,3 @@ class BookmarkManager < Sinatra::Base
   #   @result = game.play
   #   erb(:result)
   # end
-
-  run! if app_file == $0
-end
