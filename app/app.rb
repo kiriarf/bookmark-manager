@@ -10,6 +10,7 @@ class BookmarkManager < Sinatra::Base
 
   get '/bookmarks' do
     @bookmarks = Bookmark.all
+    # print @bookmarks
     erb(:'bookmarks/index')
   end
 
@@ -18,7 +19,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/add_to_database' do
-    Bookmark.create(params[:url])
+    Bookmark.create(params[:title], params[:url])
     redirect('/bookmarks')
   end
 

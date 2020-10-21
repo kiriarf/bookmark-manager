@@ -2,7 +2,7 @@
   <p>My first bookmark</p>
   <ul>
     <% @bookmarks.each do |bmk| %>
-      <li><a href="<%= bmk %>"><%= bmk %></a></li>
+      <li><a href="<%= bmk.url %>"><%= bmk.title %></a></li>
     <% end %>
   </ul>
   <form action="/add_bookmark">

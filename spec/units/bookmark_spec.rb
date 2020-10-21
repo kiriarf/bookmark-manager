@@ -1,29 +1,26 @@
 require 'bookmark'
 
 describe Bookmark do
-  let(:database) { 'bookmark_manager_test'}
-
-  before(:each) do
-    truncate_test_table
-    populate_table
-  end
   describe '.all' do
+    let(:bookmark_arr) { [["Makers", "http://www.makersacademy.com"], 
+      ["Destroy All Software", "http://www.destroyallsoftware.com"],
+      ["Twitter", "http://www.twitter.com"]]}
 
     it 'returns all bookmarks' do
-      bookmarks = Bookmark.all(database)
+      bookmarks = Bookmark.all
 
-      expect(bookmarks).to include("http://www.makersacademy.com")
-      expect(bookmarks).to include("http://www.destroyallsoftware.com")
-      expect(bookmarks).to include("http://www.google.com")
+      3.times { |each|
+        expect(bookmarks[each]).to have_attributes(title: bookmark_arr[each][0], url: bookmark_arr[each][1])
+      }
     end
   end
 
   describe '.create' do
 
     it 'adds new bookmark' do
-      Bookmark.create(database, 'http://facebook.com')
-      bookmarks = Bookmark.all(database)
-      expect(bookmarks).to include('http://facebook.com')
+      Bookmark.create('Facebook', 'http://facebook.com')
+      bookmarks = Bookmark.all
+      expect(bookmarks.last).to have_attributes({title: 'Facebook', url: 'http://facebook.com'})
 
     end
   end
