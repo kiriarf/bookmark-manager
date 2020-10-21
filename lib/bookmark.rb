@@ -11,7 +11,7 @@ class Bookmark
 
   def self.all
     connect_to_db
-    
+
     result = @@con.exec("SELECT * FROM bookmarks;")
     # result.map { |bookmark| { title: bookmark['title'], url: bookmark['url'] } }
     result.map do |bookmark|
@@ -25,11 +25,19 @@ class Bookmark
     @@con.exec("INSERT INTO bookmarks(title, url) VALUES('#{title}','#{url}');")
   end
 
+  def self.delete(titles)
+    connect_to_db
+    titles.each do |title|
+      @@con.exec("DELETE FROM bookmarks WHERE title='#{title}';")
+    end
+
+  end
+
   private
   def self.connect_to_db
     if ENV['RACK_ENV'] == 'test'
       @@con = PG.connect(dbname: 'bookmark_manager_test')
-    else 
+    else
       @@con = PG.connect(dbname: 'bookmark_manager')
     end
   end
